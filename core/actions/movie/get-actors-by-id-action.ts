@@ -1,15 +1,14 @@
 import { movieApi } from '@/core/api/movie-api'
-import { Cast } from '@/infrastructure/interface/movie.cast.interface'
-import { MovieDBCast } from '@/infrastructure/interface/the-movie-db/credits.response'
+import { CreditResopnse } from '@/infrastructure/interface/moviedb.credit-response'
 import { CastMapper } from '@/infrastructure/mappers/cast.mapper'
 
-const getActorByIdAction = async(movieId: number | string): Promise<Cast> => {
+const getActorByIdAction = async(movieId: number | string) => {
     try {
         
-        const {data} = await movieApi.get<MovieDBCast>(`/${movieId}/credits`)
+        const {data} = await movieApi.get<CreditResopnse>(`/${movieId}/credits`)
         console.log('Pelicula - HTTP cargada')
         
-        return CastMapper.fromMovieDbCastToEntity(data);
+        return data.cast.map(CastMapper.fromMovieDBCastToEntity)
 
     } catch (error) {
         console.log(error);

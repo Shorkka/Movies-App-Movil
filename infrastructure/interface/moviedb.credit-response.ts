@@ -1,3 +1,9 @@
+export interface CreditResopnse {
+    id:   number;
+    cast: MovieDBCast[];
+    crew: MovieDBCast[];
+}
+
 export interface MovieDBCast {
     adult:                boolean;
     gender:               number;

@@ -10,7 +10,7 @@ export const useMovie = (id: number) => {
 
   })
   const castQuery = useQuery({
-    queryKey: ['actors', id],
+    queryKey: ['movie', id, 'cast'],
     queryFn: () => getActorByIdAction(id),
     staleTime: 1000*60*60*24,
   })
